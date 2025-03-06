@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     function startLoader() {
+        document.body.style.overflow = "hidden";
         let landingContent = document.getElementById("landing-content-one");
         if (landingContent) {
             landingContent.style.opacity = 1;
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     mainContent.style.opacity = 1;
                     mainContent.style.transform = 'translateX(0)';
                     mainContent.style.transition = "transform 1s ease, opacity 1s ease";
+                    document.body.removeAttribute("style");
                 }, 2000);
 
             }, 7500); 

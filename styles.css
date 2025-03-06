@@ -75,7 +75,7 @@ img {
 }
 .zrMainContent {
     opacity: 0;
-    transform: translate(100%);
+    transform: translateX(100%);
 }
 header {
     display: flex;
