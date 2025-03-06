@@ -110,96 +110,124 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    let isVisible = false;
-    let secondSection = document.querySelector('.second-section');
+    // let isVisible = false;
+    // let secondSection = document.querySelector('.second-section');
 
-    const observer = new IntersectionObserver((entries) => {
+    // const observer = new IntersectionObserver((entries) => {
+    //     entries.forEach((entry) => {
+    //         isVisible = entry.isIntersecting;
+    //         if (entry.isIntersecting) {
+    //             // isVisible = entry.isIntersecting;
+    //             secondSection.style.transform = "translateY(0px)";
+    //             secondSection.style.opacity = 1;
+    //             secondSection.style.transition = "transform 1s ease, opacity 1s ease";
+    //             console.log('Second section has entered the viewport!', isVisible);
+    //         } else {
+    //             // isVisible = entry.isIntersecting;
+    //             console.log('Second section has exited the viewport!', isVisible);
+    //         }
+    //     });
+    // }, {
+    //     root: null, // Use the viewport as the root
+    //     threshold: 0.1, // Trigger when 10% of the element is visible
+    // });
+
+    // observer.observe(secondSection);
+
+
+    // let isVisibleIntroduction = false;
+    // let introductionSection = document.querySelector('.zr-introduction');
+
+    // const introductionObserver = new IntersectionObserver((entries) => {
+    //     entries.forEach((entry) => {
+    //         isVisibleIntroduction = entry.isIntersecting;
+    //         if (entry.isIntersecting) {
+    //             introductionSection.classList.add("invisible");
+    //             console.log("introductionObserver ", introductionObserver)
+    //             introductionSection.style.transform = "translateY(0px)";
+    //             introductionSection.style.opacity = 1;
+    //             introductionSection.style.transition = "transform 1s ease, opacity 1s ease";
+    //         } else {
+    //             introductionSection.classList.remove("invisible");
+    //         }
+    //     });
+    // }, {
+    //     root: null, // Use the viewport as the root
+    //     threshold: 0.1, // Trigger when 10% of the element is visible
+    // });
+
+    // introductionObserver.observe(introductionSection);
+
+
+    // let words = document.querySelectorAll(".second-section .word");
+    // function scrollTrigger() {
+    //     if (isVisible) {
+    //         secondSection.style.transform = "translateY(0px)";
+    //         secondSection.style.opacity = 1;
+    //         secondSection.style.transition = "transform 1s ease, opacity 1s ease";
+    //         let value = window.scrollY;
+    //         let tempVal = parseFloat(value) - parseFloat(secondSection.offsetHeight);
+    //         words.forEach((word, index) => {
+    //             word.classList.add("active"+index);
+    //             word.style.transform = `translate(${(tempVal/((index+1)*10))}px, ${(tempVal/((index+1)*30))}px)`;
+    //             word.style.opacity = 1;
+    //             word.style.transition = "transform 1s ease, opacity 1s ease";
+    //         })
+
+    //     } else if(isVisibleIntroduction) {
+    //         introductionSection.style.transform = "translateY(0px)";
+    //         introductionSection.style.opacity = 1;
+    //         introductionSection.style.transition = "transform 1s ease, opacity 1s ease";
+    //     }
+    //     else {
+    //         introductionSection.style.transform = "translateY(100px)";
+    //         introductionSection.style.opacity = 0;
+    //         introductionSection.style.transition = "transform 1s ease, opacity 1s ease";
+
+    //         secondSection.style.transform = "translateY(100px)";
+    //         secondSection.style.opacity = 0;
+    //         secondSection.style.transition = "transform 1s ease, opacity 1s ease";
+
+    //         words.forEach(word => {
+    //             word.classList.remove("active");
+    //         })
+    //     }
+    // }
+    // window.addEventListener('scroll', scrollTrigger)
+
+
+    const observerOptions = {
+        threshold: 0.1,
+    };
+    
+    const animationBlocks = document.querySelectorAll(".animation-block");
+    const animationSummaryTexts = document.querySelectorAll(".animation-container .summaryText p");
+    const animationSections = document.querySelectorAll(".animation-section");
+
+    function observerCallback(entries, observer) {
         entries.forEach((entry) => {
-            isVisible = entry.isIntersecting;
             if (entry.isIntersecting) {
-                // isVisible = entry.isIntersecting;
-                secondSection.style.transform = "translateY(0px)";
-                secondSection.style.opacity = 1;
-                secondSection.style.transition = "transform 1s ease, opacity 1s ease";
-                console.log('Second section has entered the viewport!', isVisible);
-            } else {
-                // isVisible = entry.isIntersecting;
-                console.log('Second section has exited the viewport!', isVisible);
+                textShowUp(entry.target);
+            } 
+            else {
+                textShowDown(entry.target);
             }
         });
-    }, {
-        root: null, // Use the viewport as the root
-        threshold: 0.1, // Trigger when 10% of the element is visible
-    });
-
-    observer.observe(secondSection);
-
-
-    let isVisibleIntroduction = false;
-    let introductionSection = document.querySelector('.zr-introduction');
-
-    const introductionObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            isVisibleIntroduction = entry.isIntersecting;
-            if (entry.isIntersecting) {
-                introductionSection.classList.add("invisible");
-                console.log("introductionObserver ", introductionObserver)
-                introductionSection.style.transform = "translateY(0px)";
-                introductionSection.style.opacity = 1;
-                introductionSection.style.transition = "transform 1s ease, opacity 1s ease";
-            } else {
-                introductionSection.classList.remove("invisible");
-            }
-        });
-    }, {
-        root: null, // Use the viewport as the root
-        threshold: 0.1, // Trigger when 10% of the element is visible
-    });
-
-    introductionObserver.observe(introductionSection);
-
-
-    let words = document.querySelectorAll(".second-section .word");
-    function scrollTrigger() {
-        if (isVisible) {
-            secondSection.style.transform = "translateY(0px)";
-            secondSection.style.opacity = 1;
-            secondSection.style.transition = "transform 1s ease, opacity 1s ease";
-            let value = window.scrollY;
-            let tempVal = parseFloat(value) - parseFloat(secondSection.offsetHeight);
-            words.forEach((word, index) => {
-                word.classList.add("active"+index);
-                word.style.transform = `translate(${(tempVal/((index+1)*10))}px, ${(tempVal/((index+1)*30))}px)`;
-                word.style.opacity = 1;
-                word.style.transition = "transform 1s ease, opacity 1s ease";
-            })
-
-        } else if(isVisibleIntroduction) {
-            introductionSection.style.transform = "translateY(0px)";
-            introductionSection.style.opacity = 1;
-            introductionSection.style.transition = "transform 1s ease, opacity 1s ease";
-        }
-        else {
-            introductionSection.style.transform = "translateY(100px)";
-            introductionSection.style.opacity = 0;
-            introductionSection.style.transition = "transform 1s ease, opacity 1s ease";
-
-            secondSection.style.transform = "translateY(100px)";
-            secondSection.style.opacity = 0;
-            secondSection.style.transition = "transform 1s ease, opacity 1s ease";
-
-            words.forEach(word => {
-                word.classList.remove("active");
-            })
-        }
-        // let value = window.scrollY;
-        // let summaryText = document.querySelector(".zr-introduction .summaryText");
-        // summaryText.style.transform = `translateY(${value*0.25}px)`;
-        // summaryText.style.opacity = 0;
-        // summaryText.style.transition = "transform 1s ease, opacity 1s ease";
     }
-    window.addEventListener('scroll', scrollTrigger)
-
+    
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    animationBlocks.forEach((element) => observer.observe(element));
+    animationSummaryTexts.forEach((element) => observer.observe(element));
+    animationSections.forEach((element) => observer.observe(element));
+    
+    function textShowUp(elem) {
+        elem.classList.add("textshowup");
+    }
+    
+    function textShowDown(elem) {
+        elem.classList.remove("textshowup");
+    }
     
 });
 
